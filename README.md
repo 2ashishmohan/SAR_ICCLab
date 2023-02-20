@@ -25,9 +25,13 @@ To run the robot navigation :
         <arg name="move_base_robot_a" default="true"/>
         <arg name="amcl_and_mapserver_a" default="true"/>
         <arg name="slam" default="false"/>
+	
+ The launch command:
+ 
+  	roslaunch icclab_summit_xl irlab_sim_summit_xls_complete.launch gmapping_robot_a:=True 
         
-        
-        
+	will 
+	![](gmapping.png) 
 2. [OpenCV](https://github.com/opencv/opencv-python)
 
 3. [Yolo V8](https://github.com/ultralytics/ultralytics)
