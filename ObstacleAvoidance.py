@@ -1,45 +1,37 @@
-#!/usr/bin/env python
 import rospy
-from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
-from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Twist
 
-class ObstAvoid:
+class ObstacleAvoidance:
     def __init__(self):
-        rospy.init_node('obstacle_avoidance')
-        self.odom_sub = rospy.Subscriber('summit_xl/amcl_pose', Odometry, self.odom_callback)
-        self.laser_sub = rospy.Subscriber('/summit_xl/scan_front', LaserScan, self.laser_callback)
-        self.cmd_vel_pub = rospy.Publisher('/summit_xl/cmd_vel', Twist, queue_size=10)
-        self.rate = rospy.Rate(10)
-        self.min_distance = 0.5
+        self.visited_points = []
+        rospy.Subscriber("/scan", LaserScan, self.laser_callback)
+        self.cmd_vel_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
 
-    def odom_callback(self, msg):
-        self.pose = msg.pose.pose
+    def laser_callback(self, scan):
+        # Get the distance of the closest obstacle
+        min_distance = min(scan.ranges)
 
-    def laser_callback(self, msg):
-        self.ranges = msg.ranges
-
-    def move(self):
-        while not rospy.is_shutdown():
-            min_range = min(self.ranges)
-            if min_range < self.min_distance:
-                twist = Twist()
-                twist.linear.x = 0.0
-                twist.angular.z = 0.0
-                self.cmd_vel_pub.publish(twist)
-            else:
+        # Check if the obstacle is close enough to the robot
+        if min_distance < 0.5:
+            # Create a twist message to avoid the obstacle
+            twist = Twist()
+            twist.linear.x = 0
+            twist.angular.z = 1
+            self.cmd_vel_pub.publish(twist)
+        else:
+            # Check if the robot has already been at this location
+            current_position = (round(scan.ranges[0], 2), round(scan.ranges[len(scan.ranges)//2], 2))
+            if current_position not in self.visited_points:
+                # If not, add it to the list of visited points
+                self.visited_points.append(current_position)
+                # Create a twist message to move the robot forward
                 twist = Twist()
                 twist.linear.x = 0.5
+                twist.angular.z = 0
                 self.cmd_vel_pub.publish(twist)
-            self.rate.sleep()
 
-if __name__ == '__main__':
-    try:
-        node = ObstAvoid()
-        node.move()
-    except rospy.ROSInterruptException:
-        pass
-
-        
-
-
+if __name__ == "__main__":
+    rospy.init_node("obstacle_avoidance")
+    avoidance = ObstacleAvoidance()
+    rospy.spin()
