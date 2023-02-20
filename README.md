@@ -1,4 +1,4 @@
-# SAR_ICCLab
+# SAR using ICC LAB - Summit_XL
 
 This repository demonstrates a series of opetaion such as obsacle avoidance, map generation and Search and Rescue in an unknown enviroinment using a ground robot
 
