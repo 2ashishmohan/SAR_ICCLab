@@ -29,9 +29,10 @@ To run the robot navigation :
  The launch command:
  
   	roslaunch icclab_summit_xl irlab_sim_summit_xls_complete.launch gmapping_robot_a:=True 
-        
-	will 
-	![](gmapping.png) 
+ will bring up the ground robot with gmapping SLAM running in it. Now if the robot is moved in the environment, the map will get auto pupulated based on the laser scan data
+ ![gmapping](gmapping.png) 
+ 
+ 
 2. [OpenCV](https://github.com/opencv/opencv-python)
 
 3. [Yolo V8](https://github.com/ultralytics/ultralytics)
