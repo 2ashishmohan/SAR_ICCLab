@@ -1,3 +1,4 @@
+# Import Libraries
 import rospy
 import random
 import numpy as np
@@ -40,12 +41,8 @@ class MOveBaseClient:
 
     def run(self):
         while not rospy.is_shutdown() and self.map_percentage < 0.95:
-            #goal = self.generate_random_goal()
             
             angle = random.uniform(0, 2*np.pi)
-            #distance = random.uniform(10, 20)
-            #x_offset = distance*np.cos(angle)
-            #y_offset = distance*np.sin(angle)
             x_offset = random.uniform(-10,10)
             y_offset = random.uniform(-10, 10)
             self.move_goal.target_pose.header.frame_id = "summit_xl_map"
@@ -59,7 +56,6 @@ class MOveBaseClient:
             self.move_goal.target_pose.pose.orientation.z = quaternion[2]
             self.move_goal.target_pose.pose.orientation.w = quaternion[3]
 
-            #self.move_goal.target_pose = goal
             rospy.loginfo("Sending goal pose to Action Server")
             self.client.send_goal(self.move_goal)
             self.client.wait_for_result()
