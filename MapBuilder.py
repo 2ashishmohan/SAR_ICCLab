@@ -26,22 +26,14 @@ class MOveBaseClient:
         self.move_goal = MoveBaseGoal()
         self.rate = rospy.Rate(1)
         self.pose = PoseStamped()
-        self.map_percentage = 0.0
-        rospy.Subscriber('/summit_xl/map', OccupancyGrid, self.map_callback)
+        
 
     def pose_callback(self, msg):
             self.pose = msg
 
-    def map_callback(self, msg):
-        num_occupied = np.count_nonzero(np.array(msg.data) > 0)
-        num_free = np.count_nonzero(np.array(msg.data) == 0)
-        map_percentage = float(num_occupied) / float(num_occupied + num_free)
-        self.map_percentage = map_percentage
-        rospy.loginfo(" Map Percentage: %f", map_percentage)
-
     def run(self):
-        while not rospy.is_shutdown() and self.map_percentage < 0.95:
-            
+        # The method generates random goal position with respect to the current position of the robot
+        while not rospy.is_shutdown():
             angle = random.uniform(0, 2*np.pi)
             x_offset = random.uniform(-10,10)
             y_offset = random.uniform(-10, 10)
