@@ -16,6 +16,7 @@ class MOveBaseClient:
     def __init__(self):
         self.client = actionlib.SimpleActionClient('/summit_xl/move_base', MoveBaseAction)
         rospy.Subscriber('/summit_xl/amcl_pose', PoseStamped, self.pose_callback)
+
         rospy.loginfo("Waiting for move_base action server...")
         wait = self.client.wait_for_server(timeout=rospy.Duration(300.0)) # takes a while for sim environment to bring up
         if not wait:
@@ -51,7 +52,7 @@ class MOveBaseClient:
             self.move_goal.target_pose.header.stamp = rospy.Time.now()
             self.move_goal.target_pose.pose.position.x = self.pose.pose.position.x + x_offset
             self.move_goal.target_pose.pose.position.y = self.pose.pose.position.y + y_offset
-            
+            print(self.pose.pose.position.x + x_offset, self.pose.pose.position.y + y_offset)
             quaternion = tf.transformations.quaternion_from_euler(0, 0, math.atan2(y_offset, x_offset))
             self.move_goal.target_pose.pose.orientation.x = quaternion[0]
             self.move_goal.target_pose.pose.orientation.y = quaternion[1]
