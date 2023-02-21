@@ -4,7 +4,7 @@ This repository demonstrates a series of opetaion such as obsacle avoidance, map
 
 # Installation and Dependancies
 
-1. [Ground Robot Installation](https://github.com/icclab/rosdocked-irlab)
+1. [Ground Robot Setup - Summit XL Container](https://github.com/icclab/rosdocked-irlab)
 
 To run the robot navigation :
 
