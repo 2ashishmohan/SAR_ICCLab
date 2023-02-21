@@ -49,3 +49,6 @@ By running the launch file, the ground robot equipped with gmapping SLAM will be
 : The node activates a Move Base client with existing map boundaries as next goal values
 5. [ Object Detection](detection.py)
 : The node implements a YOLO V8 model for object detection in the environment
+
+# Final Presentation
+[FInal Technical Presentation](https://github.com/2ashishmohan/SAR_ICCLab/blob/main/SAR_Presentation.pdf)
