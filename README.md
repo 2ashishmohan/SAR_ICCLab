@@ -1,6 +1,6 @@
 # SAR using ICC LAB - Summit_XL
 
-This repository demonstrates a series of opetaion such as obsacle avoidance, map generation and Search and Rescue in an unknown enviroinment using a ground robot
+This repository showcases the implementation of various operations, including obstacle avoidance, map generation, and search and rescue in an unfamiliar environment using a ground robot.
 
 # Installation and Dependancies
 
@@ -29,7 +29,7 @@ To run the robot navigation :
  The launch command:
  
   	roslaunch icclab_summit_xl irlab_sim_summit_xls_complete.launch gmapping_robot_a:=True 
- will bring up the ground robot with gmapping SLAM running in it. Now if the robot is moved in the environment, the map will get auto pupulated based on the laser scan data
+By running the launch file, the ground robot equipped with gmapping SLAM will be initialized. As the robot is navigated through the environment, the map will be automatically generated using laser scan data
  ![gmapping](gmapping.png) 
  
  
@@ -37,3 +37,6 @@ To run the robot navigation :
 
 3. [Yolo V8](https://github.com/ultralytics/ultralytics)
   
+# Different Nodes and their functionality
+
+1. [Obstacle Avoidance](SimpleObstacleAvoidance.py) 
