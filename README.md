@@ -40,3 +40,12 @@ By running the launch file, the ground robot equipped with gmapping SLAM will be
 # Different Nodes and their functionality
 
 1. [Obstacle Avoidance](SimpleObstacleAvoidance.py) 
+: This node implements a simple obstacle avoidance sequence using the lidar scan data and a threshold distance value
+2. [Obstacle Avoidance with Position Tracking](ObstacleAvoidance_PositionTrack.py)
+: This node implements a obstacle avoidance sequence with position tracking to avoid visiting a location more than ones
+3. [Map Generation Using Move Base Client](MapBuilder.py)
+: The node activates a Move Base client with a random goal generator
+4. [Move Base Client with Map Boundaries as Goal](MapBuilder_Final.py)
+: The node activates a Move Base client with existing map boundaries as next goal values
+5. [ Object Detection](detection.py)
+: The node implements a YOLO V8 model for object detection in the environment
