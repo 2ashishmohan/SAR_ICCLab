@@ -39,6 +39,7 @@ class MOveBaseClient:
 
 
     def run(self):
+        # The method would fing the extreme points from the generated map and define a random goal position from those points
         while not rospy.is_shutdown():
             unexplored_goals = []
             map_width = self.grid.info.width
